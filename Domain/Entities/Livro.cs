@@ -1,13 +1,11 @@
-﻿using Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
 
 namespace Domain.Entities
 {
-    public class LivroDto
+
+    [Table("livro", Schema = "app_livraria")]
+    public class Livro
     {
         public int Id { get; set; }
         public string Titulo { get; set; }

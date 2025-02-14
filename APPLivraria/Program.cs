@@ -1,8 +1,9 @@
 using Application.Service;
 using Domain.Interfaces;
-using Infra;
+using Infrastructure;
 using Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System.Configuration;
 
@@ -14,7 +15,13 @@ builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
 builder.Services.AddScoped<ILivroRepository, LivroRepository>();
 builder.Services.AddScoped<ILivroService, LivroService>();
 
-builder.Services.AddDbContext<AppDbContext>(options => options.UseMySql(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddDbContext<AppDbContext>(options => {
+
+        var connetionString = builder.Configuration.GetConnectionString("DefaultConnection");
+        options.UseMySQL(connetionString, b => b.MigrationsAssembly("APPLivraria"));
+    
+
+});
 
 
 
